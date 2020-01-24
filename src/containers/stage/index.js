@@ -20,7 +20,7 @@ export default class Stage extends Component {
       return obj;
     });
     this.setState({ charList: newCharList, inputValue: val }, () => {
-      if (val === word) {
+      if (val.toLowerCase() === word.toLowerCase()) {
         this.handleCorrect();
       }
     });

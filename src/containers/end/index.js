@@ -20,9 +20,9 @@ export default function EndStage({
     let start_text = "https://twitter.com/intent/tweet?text=";
     let texto = `Consegui escrever ${qtdsCorretas} ${
       qtdsCorretas === 1 ? `palavra` : "palavras"
-    } corretamente nesse jogo tosco do @bandeiraos!!`;
+    } corretamente no Speed Bobiça do @bandeiraos!!`;
 
-    let url = `&url=${encodeURIComponent("http://google.com")}`;
+    let url = `&url=${encodeURIComponent("https://speed-bobica.herokuapp.com/")}`;
     texto = encodeURIComponent(texto);
 
     var urlComplete = start_text + texto + url;
@@ -38,7 +38,7 @@ export default function EndStage({
   return (
     <EndStageStyled>
       <div className="content">
-        <h2>Cabô!!!</h2>
+        <h2>Parô parô parô!!!</h2>
         {corrects.length > 0 ? (
           <>
             <span>
@@ -64,7 +64,7 @@ export default function EndStage({
 
         <div className="buttons">
           <Button ref={buttonRef} onClick={tryAgain} text="Tentar novamente" />
-          <Button text="Menu" onClick={backMenu} />
+          <Button text="Voltar" onClick={backMenu} />
         </div>
 
         {renderTweetButton()}

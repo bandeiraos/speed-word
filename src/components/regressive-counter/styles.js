@@ -15,6 +15,7 @@ export const RegressiveStyled = styled.div`
       margin-top: 50px;
       font-size: 30px;
       font-style: italic;
+      text-align: center;
     }
   }
 `;

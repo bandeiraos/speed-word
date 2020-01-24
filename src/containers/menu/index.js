@@ -12,7 +12,7 @@ export default function Menu({ regressive, onStart }) {
           <Button text="Iniciar" onClick={onStart} />
 
           <span>
-            by{" "}
+            Speed Bobiça v0.01 by{" "}
             <a
               target="_blank"
               rel="noopener noreferrer"

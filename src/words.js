@@ -14,6 +14,15 @@ const WORDS = [
     "pantalona",
     "pauleira",
     "rapariga",
+    "birinaite",
+    "mixuruca",
+    "piripaque",
+    "siricutico",
+    "chulapa",
+    "faniquito",
+    "lambuja",
+    "trambolho",
+    "zarolho"
 ]
 
 export default WORDS;

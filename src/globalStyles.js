@@ -24,6 +24,6 @@ export const GlobalStyles = createGlobalStyle`
         justify-content: center;
         margin: 0 auto;
         margin-top: 5%;
-        width: 1200px;
+        width: 100%;
     }
 `;

@@ -1,44 +1,60 @@
-import React, { useState, useEffect } from 'react';
-import { GlobalStyles } from './globalStyles'
-import Stage from './components/stage';
-import api from './api'
-import EndStage from './components/end';
-
-const palavras = [
-  'gola',
-  'sambiqueira',
-  'catinga',
-]
+import React, { useState, useEffect } from "react";
+import { GlobalStyles } from "./globalStyles";
+import Stage from "./containers/stage";
+import EndStage from "./containers/end";
+import WORDS from "./words";
+import Menu from "./containers/menu";
 
 function App() {
+  const [wordList, setWordList] = useState(WORDS);
+  const [word, setWord] = useState(null);
+  const [endGame, setEndGame] = useState(false);
+  const [correctsWord, setCorrectsWord] = useState([]);
+  const [counterCorrectsChars, setCounterCorrectsChars] = useState(0);
+  const [regressive, setRegressive] = useState(null);
+  const [gameStarted, setGameStarted] = useState(false);
+  const [menuActive, setMenuActive] = useState(true);
 
-  const [wordList, setWordList] = useState([])
-  const [word, setWord] = useState(null)
-  const [endGame, setEndGame] = useState(true)
-  const [correctsWord, setCorrectsWord] = useState(['ohh'])
-  const [counterCorrectsChars, setCounterCorrectsChars] = useState(0)
+  function handleOnStart() {
+    startRegressiveCount();
+  }
 
-  useEffect(() => {
-    async function loadWords() {
-      const resp = await api.get()
-      console.log('resp.data', resp.data)
-      setWordList(resp.data)
+  function startRegressiveCount() {
+    setRegressive(3);
+    setTimeout(() => {
+      setRegressive(2);
       setTimeout(() => {
-        setEndGame(true)
-      }, 5000);
-    }
+        setRegressive(1);
+        setTimeout(() => {
+          setRegressive(null);
+          setMenuActive(false);
+          startGame();
+        }, 1000);
+      }, 1000);
+    }, 1000);
+  }
 
-    loadWords();
-  }, [])
+  function startGame() {
+    setTimer();
+    setGameStarted(true);
+  }
+
+  function setTimer() {
+    setTimeout(() => {
+      setEndGame(true);
+    }, 10000);
+  }
 
   useEffect(() => {
-    setWord(randomWord())
-  }, [wordList])
+    setWord(randomWord());
+  }, [wordList]);
 
   useEffect(() => {
     if (correctsWord.length > 0)
-      setCounterCorrectsChars(counterCorrectsChars + correctsWord[correctsWord.length - 1].length)
-  }, [correctsWord])
+      setCounterCorrectsChars(
+        counterCorrectsChars + correctsWord[correctsWord.length - 1].length
+      );
+  }, [correctsWord]);
 
   function changeCorrectWord() {
     setCorrectsWord([...correctsWord, word]);
@@ -47,31 +63,47 @@ function App() {
 
   function randomWord() {
     const newWord = wordList[Math.floor(Math.random() * wordList.length)];
-    return newWord
+    return newWord;
+  }
+
+  function resetStats() {
+    setGameStarted(false);
+    setCorrectsWord([]);
+    setEndGame(false);
+    setWordList(WORDS);
+    setCounterCorrectsChars(0);
   }
 
   function handleTryAgain() {
-    
+    resetStats();
+    setMenuActive(true);
+    startRegressiveCount();
+  }
+
+  function handleBackMenu() {
+    setMenuActive(true);
+    resetStats();
   }
 
   return (
     <div className="App">
       <GlobalStyles />
-      {
-        word && !endGame &&
+      {menuActive && <Menu regressive={regressive} onStart={handleOnStart} />}
+      {gameStarted && word && !endGame && (
         <Stage
           word={word}
           handleOnCorrect={() => changeCorrectWord()}
+          totalCorrects={correctsWord.length}
         />
-      }
-
-      {
-        endGame && <EndStage
+      )}
+      {endGame && (
+        <EndStage
           counter={counterCorrectsChars}
           corrects={correctsWord}
           tryAgain={handleTryAgain}
+          backMenu={handleBackMenu}
         />
-      }
+      )}
     </div>
   );
 }

@@ -10,7 +10,8 @@ export const ButtonStyled = styled.button`
   padding: 0 20px;
   box-shadow: 0 0 14px 1px rgba(0, 0, 0, 0.1);
   font-weight: bold;
-  background-color: #fff;
+  background-color: #e2725b;
+  color: #fff;
 
   :disabled {
     background: #ccc;

@@ -1,12 +1,14 @@
 import React, { useEffect, createRef } from "react";
 import { EndStageStyled } from "./styles";
 import Button from "../../components/button";
+import Highscore from "../highscore";
 
 export default function EndStage({
   counter,
   corrects,
   tryAgain,
   backMenu,
+  nickname,
   ...props
 }) {
   const buttonRef = createRef();
@@ -22,7 +24,9 @@ export default function EndStage({
       qtdsCorretas === 1 ? `palavra` : "palavras"
     } corretamente no Speed Bobiça do @bandeiraos!!`;
 
-    let url = `&url=${encodeURIComponent("https://speed-bobica.herokuapp.com/")}`;
+    let url = `&url=${encodeURIComponent(
+      "https://speed-bobica.herokuapp.com/"
+    )}`;
     texto = encodeURIComponent(texto);
 
     var urlComplete = start_text + texto + url;
@@ -63,12 +67,18 @@ export default function EndStage({
         )}
 
         <div className="buttons">
-          <Button ref={buttonRef} onClick={tryAgain} text="Tentar novamente" />
+          <Button ref={buttonRef} onClick={tryAgain} text="Jogar novamente" />
           <Button text="Voltar" onClick={backMenu} />
         </div>
 
         {renderTweetButton()}
       </div>
+
+      <Highscore
+        nickname={nickname}
+        corrects={corrects.length}
+        counterChars={counter}
+      />
     </EndStageStyled>
   );
 }

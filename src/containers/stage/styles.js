@@ -8,7 +8,6 @@ export const StageStyled = styled.div`
   > .content {
     border-radius: 5px;
     width: 500px;
-    height: 300px;
     display: flex;
     flex-direction: column;
     align-items: center;

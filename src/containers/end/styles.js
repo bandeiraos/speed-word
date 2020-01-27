@@ -1,15 +1,17 @@
 import styled from "styled-components";
 
 export const EndStageStyled = styled.div`
+  display: flex;
+  justify-content: center;
+
   > .content {
     border-radius: 5px;
     width: 300px;
-    padding: 30px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
     color: #fff;
     font-size: 22px;
+    margin-right: 30px;
 
     > h2 {
       /* border-bottom: 1px solid #ccc; */
@@ -82,7 +84,21 @@ export const EndStageStyled = styled.div`
         &:hover:not(:disabled) {
           opacity: 0.9;
         }
+
+        &:last-child {
+          background-color: transparent;
+          border: 1px solid #fff;
+        }
       }
+    }
+  }
+
+  @media screen and (max-width: 780px) {
+    flex-direction: column;
+    align-items: center;
+    > .content {
+      margin: 0;
+      margin-bottom: 30px;
     }
   }
 `;

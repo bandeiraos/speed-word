@@ -12,7 +12,6 @@ export const RegressiveStyled = styled.div`
 
   > div {
     &:last-child {
-      margin-top: 50px;
       font-size: 30px;
       font-style: italic;
       text-align: center;

@@ -4,6 +4,8 @@ import Stage from "./containers/stage";
 import EndStage from "./containers/end";
 import WORDS from "./words";
 import Menu from "./containers/menu";
+import Highscore from "./containers/highscore";
+import Header from "./components/header";
 
 function App() {
   const [wordList, setWordList] = useState(WORDS);
@@ -14,6 +16,7 @@ function App() {
   const [regressive, setRegressive] = useState(null);
   const [gameStarted, setGameStarted] = useState(false);
   const [menuActive, setMenuActive] = useState(true);
+  const [nickname, setNickname] = useState("");
 
   function handleOnStart() {
     startRegressiveCount();
@@ -88,22 +91,34 @@ function App() {
   return (
     <div className="App">
       <GlobalStyles />
-      {menuActive && <Menu regressive={regressive} onStart={handleOnStart} />}
-      {gameStarted && word && !endGame && (
-        <Stage
-          word={word}
-          handleOnCorrect={() => changeCorrectWord()}
-          totalCorrects={correctsWord.length}
-        />
-      )}
-      {endGame && (
-        <EndStage
-          counter={counterCorrectsChars}
-          corrects={correctsWord}
-          tryAgain={handleTryAgain}
-          backMenu={handleBackMenu}
-        />
-      )}
+      <Header />
+      <div className="content">
+        {menuActive && !endGame && (
+          <Menu
+            regressive={regressive}
+            onStart={handleOnStart}
+            onChangeNick={nick => setNickname(nick)}
+            startDisabled={nickname.length === 0}
+            nick={nickname}
+          />
+        )}
+        {gameStarted && word && !endGame && (
+          <Stage
+            word={word}
+            handleOnCorrect={() => changeCorrectWord()}
+            totalCorrects={correctsWord.length}
+          />
+        )}
+        {endGame && (
+          <EndStage
+            nickname={nickname}
+            counter={counterCorrectsChars}
+            corrects={correctsWord}
+            tryAgain={handleTryAgain}
+            backMenu={handleBackMenu}
+          />
+        )}
+      </div>
     </div>
   );
 }

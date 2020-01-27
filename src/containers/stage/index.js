@@ -12,7 +12,7 @@ export default class Stage extends Component {
     const { word } = this.props;
     let newCharList = charList.map((obj, i) => {
       const char = val[i];
-      if (char === obj.char) {
+      if (char && char.toLowerCase() === obj.char) {
         obj.correct = true;
       } else {
         obj.correct = false;

@@ -15,6 +15,10 @@ export const RegressiveStyled = styled.div`
       font-size: 30px;
       font-style: italic;
       text-align: center;
+
+      @media screen and (max-width: 600px) {
+        padding: 20px;
+      }
     }
   }
 `;

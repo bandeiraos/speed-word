@@ -12,6 +12,11 @@ export const HighscoreStyled = styled.div`
     font-size: 30px;
   }
 
+  > p {
+    text-align: center;
+    margin-top: 10px;
+  }
+
   > .span-highscore {
     background-color: #d19275;
     padding: 10px;

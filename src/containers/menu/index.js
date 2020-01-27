@@ -49,7 +49,7 @@ export default function Menu({
             />
           )}
           <span>
-            Speed Bobiça v0.01 by{" "}
+            Speed Bobiça v0.02 by{" "}
             <a
               target="_blank"
               rel="noopener noreferrer"

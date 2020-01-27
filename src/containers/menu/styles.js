@@ -53,4 +53,17 @@ export const MenuStyled = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 600px) {
+    > .btns {
+      > form {
+        width: 100%;
+        > button {
+          /* width: 100%; */
+          max-width: 300px;
+          margin: 20px auto 0;
+        }
+      }
+    }
+  }
 `;
